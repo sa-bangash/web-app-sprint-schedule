@@ -18,11 +18,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // meterial design component
 import { MatInputModule, MatCardModule, MatButtonModule } from '@angular/material';
+import { SignupComponent } from './components/signup/signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
