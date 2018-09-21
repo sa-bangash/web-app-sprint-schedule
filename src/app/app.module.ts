@@ -14,22 +14,31 @@ import { LoginComponent } from './components/login/login.component';
 
 //state
 import { AuthState } from './store';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// meterial design component
+import { MatInputModule, MatCardModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        LoginComponent
-    ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        NgxsReduxDevtoolsPluginModule.forRoot(),
-        NgxsModule.forRoot([
-            AuthState,
-        ]),
-        ReactiveFormsModule
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    LoginComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsModule.forRoot([
+      AuthState,
+    ]),
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    //meterial
+    MatInputModule,
+    MatCardModule,
+    MatButtonModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
