@@ -19,7 +19,7 @@ import { AuthState } from './store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // meterial design component
-import { MatInputModule, MatCardModule, MatButtonModule, MatGridListModule, MatMenuModule, MatIconModule } from '@angular/material';
+import { MatSidenavModule, MatToolbarModule, MatInputModule, MatCardModule, MatButtonModule, MatGridListModule, MatMenuModule, MatIconModule } from '@angular/material';
 import { SignupComponent } from './components/signup/signup.component';
 //routes
 import { routes } from './app.route';
@@ -54,6 +54,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatMenuModule,
     MatIconModule,
     LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
