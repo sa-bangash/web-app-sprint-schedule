@@ -19,7 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // meterial design component
 import { MatInputModule, MatCardModule, MatButtonModule } from '@angular/material';
 import { SignupComponent } from './components/signup/signup.component';
-
+//routes
+import { routes } from './app.route';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +29,7 @@ import { SignupComponent } from './components/signup/signup.component';
   ],
   imports: [
     BrowserModule,
+    routes,
     HttpClientModule,
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsModule.forRoot([
