@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 // ngxs
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 
 import { AppComponent } from './app.component';
 
@@ -17,15 +18,18 @@ import { AuthState } from './store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // meterial design component
-import { MatInputModule, MatCardModule, MatButtonModule } from '@angular/material';
+import { MatInputModule, MatCardModule, MatButtonModule, MatGridListModule, MatMenuModule, MatIconModule } from '@angular/material';
 import { SignupComponent } from './components/signup/signup.component';
 //routes
 import { routes } from './app.route';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LayoutModule } from '@angular/cdk/layout';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -35,12 +39,17 @@ import { routes } from './app.route';
     NgxsModule.forRoot([
       AuthState,
     ]),
+    NgxsRouterPluginModule.forRoot(),
     ReactiveFormsModule,
     BrowserAnimationsModule,
     //meterial
     MatInputModule,
     MatCardModule,
     MatButtonModule,
+    MatGridListModule,
+    MatMenuModule,
+    MatIconModule,
+    LayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

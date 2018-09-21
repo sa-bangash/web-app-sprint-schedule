@@ -2,7 +2,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 //components
-import { LoginComponent, SignupComponent } from './components';
+import { LoginComponent, SignupComponent, DashboardComponent } from './components';
 const router: Routes = [
     {
         path: '', redirectTo: 'login', pathMatch: 'full',
@@ -14,6 +14,10 @@ const router: Routes = [
     {
         path: 'signup',
         component: SignupComponent,
+    },
+    {
+        path: 'dashboard',
+        component: DashboardComponent,
     }
 ]
 

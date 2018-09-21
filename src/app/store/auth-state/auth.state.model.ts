@@ -1,4 +1,5 @@
-import { State, Selector, Action, StateContext } from '@ngxs/store';
+import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
+import { Navigate } from '@ngxs/router-plugin';
 import { AuthService } from './auth.service';
 import { tap } from 'rxjs/operators';
 export class AuthStateModel {
@@ -27,7 +28,7 @@ export namespace AuthAction {
     name: 'Auth'
 })
 export class AuthState {
-    constructor(private service: AuthService) { }
+    constructor(private service: AuthService, private store: Store) { }
     @Action(AuthAction.Login)
     login({ patchState }: StateContext<AuthStateModel>, action: AuthAction.Login) {
         return this.service.login(action.payload)
@@ -35,6 +36,7 @@ export class AuthState {
                 patchState({
                     ...resp,
                 })
+                this.store.dispatch(new Navigate(['dashboard']))
             }))
     }
 
