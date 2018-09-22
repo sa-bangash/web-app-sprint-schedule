@@ -10,12 +10,10 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 
 import { AppComponent } from './app.component';
-
-// store
 import { LoginComponent } from './components/login/login.component';
 
 //state
-import { AuthState } from './store';
+import { AuthState, TaskState } from './store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // meterial design component
@@ -25,6 +23,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { routes } from './app.route';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LayoutModule } from '@angular/cdk/layout';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +38,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsModule.forRoot([
       AuthState,
+      TaskState,
     ]),
     NgxsRouterPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot({

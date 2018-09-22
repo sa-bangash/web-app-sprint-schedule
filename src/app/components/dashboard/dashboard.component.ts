@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointState, BreakpointObserver } from '@angular/cdk/layout';
-
+import { TaskAction } from '../../store';
+import { Store } from '@ngxs/store';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -30,5 +31,8 @@ export class DashboardComponent {
   );
 
   opened: boolean;
-  constructor(private breakpointObserver: BreakpointObserver) { }
+  constructor(private breakpointObserver: BreakpointObserver, private store: Store) {
+    this.store.dispatch(new TaskAction.FetchAll());
+  }
+
 }
