@@ -15,7 +15,6 @@ export class TokenHttpinterceptor implements HttpInterceptor {
 
   private handleAccess(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.store.selectSnapshot(AuthState.token);
-    console.log(token);
     const request = req.clone({
       setHeaders: {
         Authorization: `Basic ${token}`,

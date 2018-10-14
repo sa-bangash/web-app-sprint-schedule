@@ -2,6 +2,7 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { tap } from 'rxjs/operators';
 import { TaskService } from './task.service';
+
 export class TaskModel {
     storyNumber?: string;
     description?: string;
@@ -44,14 +45,14 @@ export namespace TaskAction {
 })
 export class TaskState {
     constructor(private service: TaskService, private store: Store) { }
-
+    @Selector()
+    static task(state: TaskStateModel): TaskModel[] { return state.list }
 
     @Action(TaskAction.FetchAll)
     fetchAll({ patchState }: StateContext<TaskStateModel>, action: TaskAction.FetchAll) {
         return this.service.fetchAll()
             .pipe(
                 tap((resp) => {
-                    console.log(resp);
                     patchState({
                         list: resp,
                     })

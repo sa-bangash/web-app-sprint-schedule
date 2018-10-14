@@ -1,30 +1,31 @@
-<mat-toolbar>My App</mat-toolbar>
-<mat-sidenav-container class="example-container">
-  <mat-sidenav mode="side" opened>Sidenav content</mat-sidenav>
-  <mat-sidenav-content>
-    <div class="grid-container">
-      <h1 class="mat-h1">Dashboard</h1>
-      <mat-grid-list cols="2" rowHeight="350px">
-        <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows" >
-          <mat-card class="dashboard-card">
-            <mat-card-header>
-              <mat-card-title>
-                {{card.title}}
-                <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-                  <mat-icon>more_vert</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu" xPosition="before">
-                  <button mat-menu-item>Expand</button>
-                  <button mat-menu-item>Remove</button>
-                </mat-menu>
-              </mat-card-title>
-            </mat-card-header>
-            <mat-card-content class="dashboard-card-content">
-              <div>Card Content Here</div>
-            </mat-card-content>
-          </mat-card>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<div class="main">
+  <h1>Weekly Tasks Plan and Schedule</h1>
+
+  <table cellpadding="0" cellspacing="0">
+    <thead>
+      <tr>
+        <th colspan="5" bgcolor="#66CCFF">M. Faheem Sikandar</th>
+      </tr>
+      <tr>
+        <th colspan="5" class="font-capital">Monday</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th width="5%">S.no.</th>
+        <th width="57%">Tasks</th>
+        <th width="10%">User Story</th>
+        <th width="13%">Estimated Time</th>
+        <th width="15%">Status</th>
+      </tr>
+      <tr *ngFor="let task of tasks | async">
+        <td>1.</td>
+        <td>{{task.description}}</td>
+        <td>{{task.storyNumber}}</td>
+        <td>{{task.estimatedTime}} hr</td>
+        <td class="complete">{{task.status? 'Done': 'To Do'}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
