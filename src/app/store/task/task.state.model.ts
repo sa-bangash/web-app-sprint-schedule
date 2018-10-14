@@ -8,6 +8,12 @@ export class TaskModel {
     description?: string;
     estimatedTime?: string;
     status?: boolean;
+    get statusDisplay(): string {
+        return this.status ? 'Done' : 'To Do';
+    }
+    static getObject(data): TaskModel {
+        return Object.assign(new TaskModel(), data);
+    }D
 }
 export class TaskStateModel {
     list: TaskModel[];
@@ -54,7 +60,7 @@ export class TaskState {
             .pipe(
                 tap((resp) => {
                     patchState({
-                        list: resp,
+                        list: resp.map((item) => TaskModel.getObject(item)),
                     })
                 })
             )
