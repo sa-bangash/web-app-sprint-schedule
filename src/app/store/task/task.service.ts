@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { TaskModel } from './task.state.model'
+import { ActiveService } from '../../http-helper';
 @Injectable({
   providedIn: 'root'
 })
-export class TaskService {
+export class TaskService extends ActiveService {
 
-  baseUrl = environment.restUrl;
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) {
+    super(http);
+  }
 
   add(obj: TaskModel): Observable<TaskModel> {
-    return this.http.post(`${this.baseUrl}task`, obj) as Observable<TaskModel>;
+    return this.post(`task`, obj) as Observable<TaskModel>;
   }
 
   fetchAll(): Observable<TaskModel[]> {
-    return this.http.get(`${this.baseUrl}task`) as Observable<TaskModel[]>
+    return this.get(`task`) as Observable<TaskModel[]>
   }
 }
