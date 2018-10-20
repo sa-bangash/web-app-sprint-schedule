@@ -3,4 +3,18 @@
         display: flex;
         justify-content: space-around;
         margin:30px 100px;
+        margin-bottom: auto;
   }
+
+  .form-fields .mat-form-field{
+    align-self: flex-end;
+    margin-left:30px;
+    }
+    .form-fields .mat-form-field.textarea{
+        flex:2 1 0;
+        margin-left: 0px;
+    }
+
+    button{
+        align-self: flex-end;
+    }
