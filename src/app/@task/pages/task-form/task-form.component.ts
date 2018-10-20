@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, ofActionSuccessful, Actions } from '@ngxs/store';
-import { TaskAction } from '../../store/task.state.model';
+import { Store, ofActionSuccessful, Actions, Select } from '@ngxs/store';
+import { TaskAction, TaskState, TaskModel } from '../../store/task.state.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'task-form',
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.css']
 })
 export class TaskFormComponent implements OnInit {
+  @Select(TaskState.taskError)
+  error: Observable<TaskModel>;
   form: FormGroup;
   constructor(
     private store: Store,

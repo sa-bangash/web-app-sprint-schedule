@@ -1,6 +1,6 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
-import { tap } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
 import { TaskService } from './task.service';
 
 export class TaskModel {
@@ -19,6 +19,7 @@ export class TaskModel {
 export class TaskStateModel {
     list: TaskModel[];
     selectedTask: TaskModel;
+    error: TaskModel;
 }
 
 export namespace TaskAction {
@@ -55,6 +56,11 @@ export class TaskState {
     @Selector()
     static task(state: TaskStateModel): TaskModel[] { return state.list }
 
+    @Selector()
+    static taskError(state: TaskStateModel): TaskModel {
+        return state.error;
+    }
+
     @Action(TaskAction.FetchAll)
     fetchAll({ patchState }: StateContext<TaskStateModel>, action: TaskAction.FetchAll) {
         return this.service.fetchAll()
@@ -71,14 +77,19 @@ export class TaskState {
     add(ctx: StateContext<TaskStateModel>, action: TaskAction.Add) {
         const state = ctx.getState();
         const payload = TaskModel.getObject(action.payload);
-        console.log(payload);
         return this.service.add(payload)
             .pipe(
                 tap((resp) => {
-                    console.log(TaskModel.getObject(resp));
                     ctx.patchState({
-                        list: [...state.list, TaskModel.getObject(resp)]
+                        list: [...state.list, TaskModel.getObject(resp)],
+                        error:TaskModel.getObject()
                     })
+                }),
+                catchError((err) => {
+                    ctx.patchState({
+                        error: TaskModel.getObject(err.error),
+                    })
+                    throw err;
                 })
             )
     }

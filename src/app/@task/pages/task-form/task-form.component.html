@@ -2,12 +2,15 @@
   <div class="form-fields">
     <mat-form-field class="textarea">
       <textarea formControlName="description" type="text" matInput placeholder="Description"></textarea>
+      <mat-hint>{{(error | async)?.description}}</mat-hint>
     </mat-form-field>
     <mat-form-field>
       <input formControlName="storyNumber" type="text" matInput placeholder="User Story">
+      <mat-hint>{{(error | async)?.storyNumber}}</mat-hint>
     </mat-form-field>
     <mat-form-field>
       <input formControlName="estimatedTime" type="text" matInput placeholder="Estimated Time">
+      <mat-hint>{{(error | async)?.estimatedTime}}</mat-hint>
     </mat-form-field>
     <button type="submit" mat-button>Submit</button>
   </div>
