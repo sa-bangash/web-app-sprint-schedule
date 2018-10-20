@@ -1,0 +1,31 @@
+<div class="main">
+  <h1>Weekly Tasks Plan and Schedule</h1>
+
+  <table cellpadding="0" cellspacing="0">
+    <thead>
+      <tr>
+        <th colspan="5" bgcolor="#66CCFF">M. Faheem Sikandar</th>
+      </tr>
+      <tr>
+        <th colspan="5" class="font-capital">Monday</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th width="5%">S.no.</th>
+        <th width="57%">Tasks</th>
+        <th width="10%">User Story</th>
+        <th width="13%">Estimated Time</th>
+        <th width="15%">Status</th>
+      </tr>
+      <tr *ngFor="let task of tasks | async">
+        <td>1.</td>
+        <td>{{task.description}}</td>
+        <td>{{task.storyNumber}}</td>
+        <td>{{task.estimatedTime}} hr</td>
+        <td class="complete">{{task.statusDisplay}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

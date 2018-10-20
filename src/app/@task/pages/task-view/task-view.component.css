@@ -1,0 +1,77 @@
+*{
+	font-family: 'Roboto', sans-serif;
+}
+
+body{
+	background-color:#fff;
+}
+
+.main{
+	margin:0 auto;
+	width:80%;
+}
+
+.main > h1{
+	margin-bottom:30px;
+	text-align:center;
+	margin-top:30px;
+	font-weight:500;
+	font-size:28px;
+	color:#333;
+}
+
+.main table{
+	background-color:#fff;
+	border:1px solid #ccc;
+	border-bottom:none;
+	margin-bottom:20px;
+	width:100%;
+}
+
+.main table tr th{
+	border-bottom:1px solid #ccc;
+	padding:5px 10px;
+	font-weight:500;
+	font-size:16px;
+}
+
+.main table tr th span{
+	text-transform:capitalize;
+	font-weight:400;
+	font-size:14px;
+	color:#777;
+}
+
+.main table .font-capital{
+	text-transform:uppercase;
+}
+
+.main table tbody tr th{
+	text-align:left;
+	font-size:14px;
+}
+
+.main table tbody tr td{
+	border-bottom:1px solid #ccc;
+	padding:3px 8px;
+	font-size:12px;
+}
+
+.main table tbody tr:nth-child(even) td{
+	background-color:#ddd;
+}
+
+.main table .progress{
+	background-color:#FC3 !important;
+	color:#4c4c4c;
+}
+
+.main table .complete{
+	background-color:#0F6 !important;
+	color:#4c4c4c;
+}
+
+.main table .pending{
+	background-color:red !important;
+	color:#4c4c4c;
+}

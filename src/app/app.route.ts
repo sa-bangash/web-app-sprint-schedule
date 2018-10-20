@@ -7,7 +7,6 @@ import { LoginComponent, SignupComponent, DashboardComponent } from './component
 // guards
 import { LoginGuard, AuthGuard } from './guards';
 
-
 const router: Routes = [
     {
         path: '', redirectTo: 'login', pathMatch: 'full',
@@ -23,7 +22,8 @@ const router: Routes = [
     },
     {
         path: 'dashboard',
-        component: DashboardComponent,
+        // component: DashboardComponent,
+        loadChildren:'./@task/task.module#TaskModule',
         canActivate: [AuthGuard],
     }
 ]

@@ -9,11 +9,11 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 
+// state
+import { AuthState } from './store';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 
-//state
-import { AuthState, TaskState } from './store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // meterial design component
@@ -38,9 +38,7 @@ import { TokenHttpinterceptor } from './http-helper/token.httpinterceptor.servic
     routes,
     HttpClientModule,
     NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsModule.forRoot([
-      AuthState,
-      TaskState,
+    NgxsModule.forRoot([AuthState
     ]),
     NgxsRouterPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot({
