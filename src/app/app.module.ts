@@ -17,15 +17,15 @@ import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // meterial design component
-import { MatSidenavModule, MatToolbarModule, MatInputModule, MatCardModule, MatButtonModule, MatGridListModule, MatMenuModule, MatIconModule } from '@angular/material';
 import { SignupComponent } from './components/signup/signup.component';
 //routes
 import { routes } from './app.route';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { LayoutModule } from '@angular/cdk/layout';
 
 // service
 import { TokenHttpinterceptor } from './http-helper/token.httpinterceptor.service';
+//material module
+import { MaterialModuleModule } from './@material-module/material.module'
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,16 +46,7 @@ import { TokenHttpinterceptor } from './http-helper/token.httpinterceptor.servic
     }),
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    //meterial
-    MatInputModule,
-    MatCardModule,
-    MatButtonModule,
-    MatGridListModule,
-    MatMenuModule,
-    MatIconModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatSidenavModule,
+    MaterialModuleModule,
   ],
   providers: [
     {
