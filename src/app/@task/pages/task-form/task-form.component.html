@@ -1,11 +1,14 @@
-<div>
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Favorite food" value="Sushi">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-fields">
+    <mat-form-field>
+      <textarea formControlName="description" type="text" matInput placeholder="Description"></textarea>
     </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <textarea matInput placeholder="Leave a comment"></textarea>
+    <mat-form-field>
+      <input formControlName="storyNumber" type="text" matInput placeholder="User Story">
     </mat-form-field>
-  </form>
-</div>
+    <mat-form-field>
+      <input formControlName="estimatedTime" type="text" matInput placeholder="Estimated Time">
+    </mat-form-field>
+    <button type="submit" mat-button>Submit</button>
+  </div>
+</form>

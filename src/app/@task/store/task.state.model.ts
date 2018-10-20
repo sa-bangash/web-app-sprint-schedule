@@ -11,9 +11,10 @@ export class TaskModel {
     get statusDisplay(): string {
         return this.status ? 'Done' : 'To Do';
     }
-    static getObject(data): TaskModel {
+    static getObject(data = {}): TaskModel {
         return Object.assign(new TaskModel(), data);
-    }D
+    }
+
 }
 export class TaskStateModel {
     list: TaskModel[];
@@ -32,7 +33,7 @@ export namespace TaskAction {
 
     export class Add {
         static readonly type = '[Task] post';
-        constructor(public payload: TaskStateModel) { }
+        constructor(public payload: any) { }
     }
 
     export class Update {
@@ -67,8 +68,19 @@ export class TaskState {
     }
 
     @Action(TaskAction.Add)
-    add({ patchState }: StateContext<TaskStateModel>, action: TaskAction.Add) {
-
+    add(ctx: StateContext<TaskStateModel>, action: TaskAction.Add) {
+        const state = ctx.getState();
+        const payload = TaskModel.getObject(action.payload);
+        console.log(payload);
+        return this.service.add(payload)
+            .pipe(
+                tap((resp) => {
+                    console.log(TaskModel.getObject(resp));
+                    ctx.patchState({
+                        list: [...state.list, TaskModel.getObject(resp)]
+                    })
+                })
+            )
     }
 }
 
