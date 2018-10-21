@@ -4,47 +4,57 @@ import { Store, Select } from '@ngxs/store';
 import { TaskState, TaskModel } from '../../store';
 import { Observable } from 'rxjs';
 
+interface IGroupData {
+  name: string;
+  task: {
+    [key: string]: TaskModel[];
+  }
+}
 @Component({
   selector: 'app-task-view',
   templateUrl: './task-view.component.html',
   styleUrls: ['./task-view.component.css']
 })
 export class TaskViewComponent {
-  taskGroupData: { date: string, task: TaskModel[] }[] = [];
+  groupData: IGroupData[] = []
   list: TaskModel[] = [];
 
   @Select(TaskState.task)
   tasks: Observable<TaskModel[]>;
 
   constructor(private store: Store) {
-    this.store.dispatch(new TaskAction.FetchAll());
+    this.store.dispatch(new TaskAction.FetchMy());
     this.tasks.subscribe((list) => {
-      console.log(list);
       if (list) {
         this.list = list;
-        this.groupByDate();
+        this.groupByUser()
       }
     })
   }
-  groupByDate() {
-    this.taskGroupData = [];
+  groupByUser() {
+    this.groupData = []
     this.list.forEach((item) => {
-      const idx = this.indexOf(item.date);
-      if (idx > -1) {
-        this.taskGroupData[idx].task.push(item)
-      } else if (idx === -1) {
-        this.taskGroupData.push({
-          date: item.date,
-          task: [item]
+      const nameIdx = this.indexOfName(item.user.name);
+      if (nameIdx > -1) {
+        if (this.groupData[nameIdx].task[item.date]) {
+          this.groupData[nameIdx].task[item.date].push(item)
+        } else {
+          this.groupData[nameIdx].task[item.date] = [item];
+        }
+      } else if (nameIdx === -1) {
+        this.groupData.push({
+          name: item.user.name,
+          task: {
+            [item.date]: [item],
+          }
         })
       }
     })
-    console.log(this.taskGroupData);
   }
-
-  indexOf(key) {
-    return this.taskGroupData.findIndex((item) => {
-      return key === item.date;
+  
+  indexOfName(name) {
+    return this.groupData.findIndex((item) => {
+      return item.name === name
     })
   }
 }

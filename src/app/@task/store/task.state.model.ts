@@ -3,12 +3,17 @@ import { Navigate } from '@ngxs/router-plugin';
 import { tap, catchError } from 'rxjs/operators';
 import { TaskService } from './task.service';
 
+export class UserModel {
+    name: string;
+    email: string;
+}
 export class TaskModel {
     storyNumber?: string;
     description?: string;
     estimatedTime?: string;
     date?: string;
     status?: boolean;
+    user?:UserModel;
     get statusDisplay(): string {
         return this.status ? 'Done' : 'To Do';
     }
@@ -25,9 +30,12 @@ export class TaskStateModel {
 
 export namespace TaskAction {
     export class FetchAll {
-        static readonly type = '[Task] Fetch All';
+        static readonly type = '[Task] Fetch All Task';
     }
 
+    export class FetchMy{
+        static readonly type='[Task] Fetch My Task'
+    }
     export class FetchById {
         static readonly type = '[Task] Fetch by id';
         constructor(public payload: { id: string }) { }
@@ -62,6 +70,17 @@ export class TaskState {
         return state.error;
     }
 
+    @Action(TaskAction.FetchMy)
+    fetchMy({ patchState }: StateContext<TaskStateModel>, action: TaskAction.FetchAll) {
+        return this.service.fetchMy()
+            .pipe(
+                tap((resp) => {
+                    patchState({
+                        list: resp.map((item) => TaskModel.getObject(item)),
+                    })
+                })
+            )
+    }
     @Action(TaskAction.FetchAll)
     fetchAll({ patchState }: StateContext<TaskStateModel>, action: TaskAction.FetchAll) {
         return this.service.fetchAll()

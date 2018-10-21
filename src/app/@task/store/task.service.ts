@@ -18,6 +18,9 @@ export class TaskService extends ActiveService {
   }
 
   fetchAll(): Observable<TaskModel[]> {
+    return this.get(`task/all`) as Observable<TaskModel[]>
+  }
+  fetchMy(): Observable<TaskModel[]> {
     return this.get(`task`) as Observable<TaskModel[]>
   }
 }

@@ -48,7 +48,16 @@
 	border:1px solid #ccc;
 	margin-top: 30px;
 }
-
+.header{
+	text-align: center;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	padding: 5px 10px;
+	font-weight: 500;
+	letter-spacing: 1px;
+	background: rgb(102, 204, 255);
+}
 .margin-top-zero{
 	margin-top: 0px;
 }

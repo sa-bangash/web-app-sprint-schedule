@@ -1,15 +1,16 @@
 <task-form></task-form>
-<div class="task-table">
-  <div class="title">
+<div class="task-table" *ngFor="let data of groupData; let idx=index">
+  <div class="header">{{data.name}}</div>
+  <div class="title" *ngIf="idx===0">
     <div class="c-sno">No</div>
     <div class="c-dispcription">Description</div>
     <div class="c-storynumber">Story Number</div>
     <div class="c-time">Estimated Time</div>
     <div class="c-status">Status</div>
   </div>
-  <div class="task-options" *ngFor="let groupData of taskGroupData; let k=index;">
-    <div class="full-date" [ngClass]="{'margin-top-zero':k===0}">{{groupData.date}}</div>
-    <div class="task-values" *ngFor="let task of groupData.task;let i=index" [ngClass]="{'table-row':i%2===0}">
+  <div class="task-options" *ngFor="let date of data.task | keyvalue; let k=index;">
+    <div class="full-date" [ngClass]="{'margin-top-zero':k===0}">{{date.key}}</div>
+    <div class="task-values" *ngFor="let task of date.value;let i=index" [ngClass]="{'table-row':i%2===0}">
       <div class="c-sno">{{i+1}}</div>
       <div class="c-dispcription">{{task.description}}</div>
       <div class="c-storynumber">{{task.storyNumber}}</div>
