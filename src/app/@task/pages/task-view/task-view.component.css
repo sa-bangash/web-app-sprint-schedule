@@ -1,77 +1,57 @@
-*{
+
+.title {
+	display: flex;
+	justify-content: space-around;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	padding: 5px 5px; 
 	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
 }
 
-body{
-	background-color:#fff;
+.task-values{
+	display: flex;
+	justify-content: space-around;
+	padding: 5px 5px; 
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
 }
 
-.main{
-	margin:0 auto;
-	width:80%;
+.task-table{
+	margin: 30px;
 }
-
-.main > h1{
-	margin-bottom:30px;
-	text-align:center;
-	margin-top:30px;
-	font-weight:500;
-	font-size:28px;
-	color:#333;
+.c-sno{
+	width: 10%;
 }
-
-.main table{
-	background-color:#fff;
+.c-time{
+	width: 10%;
+}
+.c-storynumber{
+	width: 10%;
+}
+.c-status{
+	width: 15%;
+}
+.c-dispcription{
+	width: 55%;
+}
+.status{
+	background: #0F6;
+}
+.full-date{
+	text-align: center;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 10px;
 	border:1px solid #ccc;
-	border-bottom:none;
-	margin-bottom:20px;
-	width:100%;
+	margin-top: 20px;
 }
 
-.main table tr th{
-	border-bottom:1px solid #ccc;
-	padding:5px 10px;
-	font-weight:500;
-	font-size:16px;
+.margin-top-zero{
+	margin-top: 0px;
 }
-
-.main table tr th span{
-	text-transform:capitalize;
-	font-weight:400;
-	font-size:14px;
-	color:#777;
-}
-
-.main table .font-capital{
-	text-transform:uppercase;
-}
-
-.main table tbody tr th{
-	text-align:left;
-	font-size:14px;
-}
-
-.main table tbody tr td{
-	border-bottom:1px solid #ccc;
-	padding:3px 8px;
-	font-size:12px;
-}
-
-.main table tbody tr:nth-child(even) td{
-	background-color:#ddd;
-}
-
-.main table .progress{
-	background-color:#FC3 !important;
-	color:#4c4c4c;
-}
-
-.main table .complete{
-	background-color:#0F6 !important;
-	color:#4c4c4c;
-}
-
-.main table .pending{
-	background-color:red !important;
-	color:#4c4c4c;
+.table-row{
+	background-color: #ccc;
 }

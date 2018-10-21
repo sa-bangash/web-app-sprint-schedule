@@ -12,6 +12,10 @@
       <input formControlName="estimatedTime" type="text" matInput placeholder="Estimated Time">
       <mat-hint>{{(error | async)?.estimatedTime}}</mat-hint>
     </mat-form-field>
+    <mat-form-field>
+        <input formControlName="date" type="date" matInput placeholder="Estimated Time">
+        <mat-hint>{{(error | async)?.date}}</mat-hint>
+      </mat-form-field>
     <button type="submit" mat-button>Submit</button>
   </div>
 </form>

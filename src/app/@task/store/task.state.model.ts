@@ -7,6 +7,7 @@ export class TaskModel {
     storyNumber?: string;
     description?: string;
     estimatedTime?: string;
+    date?: string;
     status?: boolean;
     get statusDisplay(): string {
         return this.status ? 'Done' : 'To Do';
@@ -82,7 +83,7 @@ export class TaskState {
                 tap((resp) => {
                     ctx.patchState({
                         list: [...state.list, TaskModel.getObject(resp)],
-                        error:TaskModel.getObject()
+                        error: TaskModel.getObject()
                     })
                 }),
                 catchError((err) => {

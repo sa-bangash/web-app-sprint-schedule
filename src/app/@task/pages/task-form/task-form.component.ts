@@ -21,6 +21,7 @@ export class TaskFormComponent implements OnInit {
       description: [],
       estimatedTime: [],
       storyNumber: [],
+      date: [],
     })
   }
 

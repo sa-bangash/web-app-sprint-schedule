@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ActiveService } from '../../http-helper';
+import { ActiveService } from '../../http-helper/active.service';
 
 export interface ILogin {
   token: string;
