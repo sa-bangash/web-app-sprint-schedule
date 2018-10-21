@@ -11,7 +11,7 @@ import { TaskViewComponent } from './pages/task-view/task-view.component';
 
 import { NgxsModule } from '@ngxs/store';
 import { TaskState } from './store/task.state.model';
-
+import { SearchPipe } from '../pipes/search.pipe';
 // material 
 import { MaterialModuleModule } from '../@material-module/material.module';
 
@@ -24,7 +24,7 @@ import { MaterialModuleModule } from '../@material-module/material.module';
     NgxsModule.forFeature([TaskState]),
     MaterialModuleModule
   ],
-  declarations: [TaskFormComponent, TaskViewComponent],
+  declarations: [TaskFormComponent, TaskViewComponent,SearchPipe],
   exports: []
 })
 export class TaskModule { }

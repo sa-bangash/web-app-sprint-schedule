@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskAction } from '../../store';
+import { TaskAction, UserModel } from '../../store';
 import { Store, Select } from '@ngxs/store';
 import { TaskState, TaskModel } from '../../store';
 import { Observable } from 'rxjs';
@@ -16,21 +16,30 @@ interface IGroupData {
   styleUrls: ['./task-view.component.css']
 })
 export class TaskViewComponent {
+  resourceSearch='';
   groupData: IGroupData[] = []
   list: TaskModel[] = [];
-
+  userList: string[] = [];
   @Select(TaskState.task)
   tasks: Observable<TaskModel[]>;
 
   constructor(private store: Store) {
-    this.store.dispatch(new TaskAction.FetchMy());
+    this.store.dispatch(new TaskAction.FetchAll());
     this.tasks.subscribe((list) => {
       if (list) {
         this.list = list;
         this.groupByUser()
+        this.populateUserList();
       }
     })
   }
+
+  populateUserList() {
+    this.userList = this.groupData.map((item) => {
+      return item.name;
+    })
+  }
+
   groupByUser() {
     this.groupData = []
     this.list.forEach((item) => {
@@ -51,7 +60,7 @@ export class TaskViewComponent {
       }
     })
   }
-  
+
   indexOfName(name) {
     return this.groupData.findIndex((item) => {
       return item.name === name
