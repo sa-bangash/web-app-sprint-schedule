@@ -1,5 +1,4 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { Navigate } from '@ngxs/router-plugin';
 import { tap, catchError } from 'rxjs/operators';
 import { TaskService } from './task.service';
 

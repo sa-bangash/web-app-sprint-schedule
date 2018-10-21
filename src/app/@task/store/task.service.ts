@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { TaskModel } from './task.state.model'
 import { ActiveService } from '../../http-helper';
 import { catchError } from 'rxjs/operators';
+import { SprintModel } from './sprint.state.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,5 +23,9 @@ export class TaskService extends ActiveService {
   }
   fetchMy(): Observable<TaskModel[]> {
     return this.get(`task`) as Observable<TaskModel[]>
+  }
+
+  addSprint(obj: any): Observable<SprintModel> {
+    return this.post('task/sprint', obj) as Observable<SprintModel>
   }
 }

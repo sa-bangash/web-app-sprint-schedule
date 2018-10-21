@@ -14,6 +14,8 @@ import { TaskState } from './store/task.state.model';
 import { SearchPipe } from '../pipes/search.pipe';
 // material 
 import { MaterialModuleModule } from '../@material-module/material.module';
+import { SprintFormComponent } from './pages/sprint-form/sprint-form.component';
+import { SprintState } from './store/sprint.state.model';
 
 @NgModule({
   imports: [
@@ -21,10 +23,10 @@ import { MaterialModuleModule } from '../@material-module/material.module';
     ReactiveFormsModule,
     FormsModule,
     TaskRoutingModule,
-    NgxsModule.forFeature([TaskState]),
+    NgxsModule.forFeature([TaskState, SprintState]),
     MaterialModuleModule
   ],
-  declarations: [TaskFormComponent, TaskViewComponent,SearchPipe],
+  declarations: [TaskFormComponent, TaskViewComponent, SearchPipe, SprintFormComponent],
   exports: []
 })
 export class TaskModule { }
