@@ -17,14 +17,22 @@ export class TaskModel {
     get statusDisplay(): string {
         return this.status ? 'Done' : 'To Do';
     }
-    static getObject(data): TaskModel {
+    static getObject(data = {} as TaskModel): TaskModel {
 
-        const newObj = Object.assign(new TaskModel(), data || {});
+        const newObj = Object.assign(new TaskModel(), data);
         if (data && typeof data.sprintId === 'object') {
             newObj.sprintId = SprintModel.getObject(data.sprintId);
         }
-        console.log(newObj);
         return newObj;
+    }
+
+    getRest() {
+        if (this.date) {
+            return Object.assign(this, {
+                data: new Date(this.date).getTime(),
+            })
+        }
+        return this;
     }
 
 }
@@ -102,7 +110,7 @@ export class TaskState {
     @Action(TaskAction.Add)
     add(ctx: StateContext<TaskStateModel>, action: TaskAction.Add) {
         const state = ctx.getState();
-        const payload = TaskModel.getObject(action.payload);
+        const payload = TaskModel.getObject(action.payload).getRest();
         return this.service.add(payload)
             .pipe(
                 tap((resp) => {

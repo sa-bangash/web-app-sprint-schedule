@@ -8,11 +8,15 @@ export class SprintModel {
     end: Date;
 
     static getObject(data: Partial<SprintModel> = {}): SprintModel {
-        const obj = {
-            ...data,
-            start: data.start ? new Date(data.start) : null,
-            end: data.end ? new Date(data.end) : null,
+        let obj = {};
+        if (data) {
+            obj = {
+                ...data,
+                start: data.start ? new Date(data.start) : null,
+                end: data.end ? new Date(data.end) : null,
+            }
         }
+
         return Object.assign(new SprintModel(), obj);
     }
     getRest = () => {
