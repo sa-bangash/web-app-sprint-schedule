@@ -2,6 +2,7 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { tap, catchError } from 'rxjs/operators';
 import { TaskService } from './task.service';
 import { SprintModel } from './sprint.state.model'
+const WeekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Satureday'];
 export class UserModel {
     name: string;
     email: string;
@@ -10,29 +11,33 @@ export class TaskModel {
     storyNumber?: string;
     description?: string;
     estimatedTime?: string;
-    date?: string;
+    date?: number;
     status?: boolean;
     user?: UserModel;
     sprintId?: string | SprintModel;
     get statusDisplay(): string {
         return this.status ? 'Done' : 'To Do';
     }
+
+    get getWeekOfDay(): string {
+        return WeekDays[new Date(this.date).getDay()];
+    }
+
     static getObject(data = {} as TaskModel): TaskModel {
 
         const newObj = Object.assign(new TaskModel(), data);
+
+        if (typeof newObj.date === 'string') {
+            newObj.date = new Date(data.date).getTime();
+            if (isNaN(newObj.date)) {
+                newObj.date = data.date;
+            }
+        }
+
         if (data && typeof data.sprintId === 'object') {
             newObj.sprintId = SprintModel.getObject(data.sprintId);
         }
         return newObj;
-    }
-
-    getRest() {
-        if (this.date) {
-            return Object.assign(this, {
-                data: new Date(this.date).getTime(),
-            })
-        }
-        return this;
     }
 
 }
@@ -110,7 +115,7 @@ export class TaskState {
     @Action(TaskAction.Add)
     add(ctx: StateContext<TaskStateModel>, action: TaskAction.Add) {
         const state = ctx.getState();
-        const payload = TaskModel.getObject(action.payload).getRest();
+        const payload = TaskModel.getObject(action.payload);
         return this.service.add(payload)
             .pipe(
                 tap((resp) => {

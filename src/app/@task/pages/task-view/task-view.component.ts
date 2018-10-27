@@ -46,16 +46,16 @@ export class TaskViewComponent {
     this.list.forEach((item) => {
       const nameIdx = this.indexOfName(item.user.name);
       if (nameIdx > -1) {
-        if (this.groupData[nameIdx].task[item.date]) {
-          this.groupData[nameIdx].task[item.date].push(item)
+        if (this.groupData[nameIdx].task[item.getWeekOfDay]) {
+          this.groupData[nameIdx].task[item.getWeekOfDay].push(item)
         } else {
-          this.groupData[nameIdx].task[item.date] = [item];
+          this.groupData[nameIdx].task[item.getWeekOfDay] = [item];
         }
       } else if (nameIdx === -1) {
         this.groupData.push({
           name: item.user.name,
           task: {
-            [item.date]: [item],
+            [item.getWeekOfDay]: [item],
           }
         })
       }
