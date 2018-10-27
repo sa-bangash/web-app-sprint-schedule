@@ -42,14 +42,19 @@ export class TaskFormComponent implements OnInit {
 
     })
   }
-
+  resetForm() {
+    this.form.patchValue({
+      description:'',
+      estimatedTime:''
+    })
+  }
   displayFn(sprint?: SprintModel): string | undefined {
     return sprint ? sprint.name : undefined;
   }
   onSubmit() {
     console.log(this.form.value)
     this.action$.pipe(ofActionSuccessful(TaskAction.Add)).subscribe(() => {
-      this.form.reset();
+      this.resetForm();
     })
     this.store.dispatch(new TaskAction.Add(this.form.value));
 
