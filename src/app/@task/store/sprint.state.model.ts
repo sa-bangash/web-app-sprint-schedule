@@ -1,8 +1,8 @@
 import { State, Action, StateContext, Store, Selector } from "@ngxs/store";
 import { TaskService } from "./task.service";
 import { tap, catchError } from "rxjs/operators";
-import { getMilliseconds } from 'date-fns';
 export class SprintModel {
+    _id: string;
     name: string;
     start: Date;
     end: Date;
@@ -13,7 +13,6 @@ export class SprintModel {
             start: data.start ? new Date(data.start) : null,
             end: data.end ? new Date(data.end) : null,
         }
-        console.log(obj)
         return Object.assign(new SprintModel(), obj);
     }
     getRest = () => {
@@ -38,11 +37,14 @@ export namespace SprintAction {
 
         }
     }
+    export class FetchAll {
+        static readonly type = '[Sprint] Fetch All';
+    }
 }
 
 @State<SprintStateModel>({
     name: 'Sprint',
-    defaults:new SprintStateModel()
+    defaults: new SprintStateModel()
 })
 export class SprintState {
 
@@ -52,11 +54,13 @@ export class SprintState {
     @Selector()
     static sprintError(state: SprintStateModel): SprintModel { return state.error; }
 
+    @Selector()
+    static fetchAll(state: SprintStateModel): SprintModel[] { return state.list; }
+
     @Action(SprintAction.Add)
     addSprint(ctx: StateContext<SprintStateModel>, action: SprintAction.Add) {
         const state = ctx.getState();
         const payload = SprintModel.getObject(action.payload).getRest();
-        console.log('payload', payload)
         return this.service.addSprint(payload)
             .pipe(
                 tap((resp) => {
@@ -70,6 +74,18 @@ export class SprintState {
                         error: SprintModel.getObject(err.error)
                     })
                     throw err;
+                })
+            )
+    }
+
+    @Action(SprintAction.FetchAll)
+    fetchAll({ patchState }: StateContext<SprintStateModel>) {
+        return this.service.FetchAllSprints()
+            .pipe(
+                tap((resp) => {
+                    patchState({
+                        list: resp.map((item) => SprintModel.getObject(item)),
+                    })
                 })
             )
     }

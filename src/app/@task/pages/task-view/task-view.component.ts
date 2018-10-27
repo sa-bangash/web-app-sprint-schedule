@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskAction, UserModel } from '../../store';
+import { TaskAction, UserModel, SprintState, SprintModel } from '../../store';
 import { Store, Select } from '@ngxs/store';
-import { TaskState, TaskModel } from '../../store';
+import { TaskState, TaskModel, SprintAction } from '../../store';
 import { Observable } from 'rxjs';
 
 interface IGroupData {
@@ -16,13 +16,14 @@ interface IGroupData {
   styleUrls: ['./task-view.component.css']
 })
 export class TaskViewComponent {
-  resourceSearch='';
+  resourceSearch = '';
   groupData: IGroupData[] = []
   list: TaskModel[] = [];
   userList: string[] = [];
   @Select(TaskState.task)
   tasks: Observable<TaskModel[]>;
 
+  
   constructor(private store: Store) {
     this.store.dispatch(new TaskAction.FetchAll());
     this.tasks.subscribe((list) => {

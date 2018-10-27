@@ -13,6 +13,7 @@ export class TaskModel {
     date?: string;
     status?: boolean;
     user?:UserModel;
+    sprintId?:string;
     get statusDisplay(): string {
         return this.status ? 'Done' : 'To Do';
     }

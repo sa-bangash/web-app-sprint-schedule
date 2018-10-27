@@ -10,6 +10,7 @@ import {
   MatIconModule,
   MatFormFieldModule,
   MatAutocompleteModule,
+  MatSelectModule,
 } from '@angular/material';
 
 import { LayoutModule } from '@angular/cdk/layout';
@@ -26,6 +27,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatSidenavModule,
     MatFormFieldModule,
     MatAutocompleteModule,
+    MatSelectModule,
   ]
 })
 export class MaterialModuleModule { }

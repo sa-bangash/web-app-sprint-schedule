@@ -28,4 +28,7 @@ export class TaskService extends ActiveService {
   addSprint(obj: any): Observable<SprintModel> {
     return this.post('task/sprint', obj) as Observable<SprintModel>
   }
+  FetchAllSprints(): Observable<SprintModel[]> {
+    return this.get('task/sprint') as Observable<SprintModel[]>
+  }
 }
