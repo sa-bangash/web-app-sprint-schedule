@@ -1,7 +1,7 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { tap, catchError } from 'rxjs/operators';
 import { TaskService } from './task.service';
-
+import { SprintModel } from './sprint.state.model'
 export class UserModel {
     name: string;
     email: string;
@@ -12,13 +12,19 @@ export class TaskModel {
     estimatedTime?: string;
     date?: string;
     status?: boolean;
-    user?:UserModel;
-    sprintId?:string;
+    user?: UserModel;
+    sprintId?: string | SprintModel;
     get statusDisplay(): string {
         return this.status ? 'Done' : 'To Do';
     }
-    static getObject(data = {}): TaskModel {
-        return Object.assign(new TaskModel(), data);
+    static getObject(data): TaskModel {
+
+        const newObj = Object.assign(new TaskModel(), data || {});
+        if (data && typeof data.sprintId === 'object') {
+            newObj.sprintId = SprintModel.getObject(data.sprintId);
+        }
+        console.log(newObj);
+        return newObj;
     }
 
 }
@@ -33,8 +39,8 @@ export namespace TaskAction {
         static readonly type = '[Task] Fetch All Task';
     }
 
-    export class FetchMy{
-        static readonly type='[Task] Fetch My Task'
+    export class FetchMy {
+        static readonly type = '[Task] Fetch My Task'
     }
     export class FetchById {
         static readonly type = '[Task] Fetch by id';
