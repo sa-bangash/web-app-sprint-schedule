@@ -19,6 +19,11 @@ export class TaskModel {
         return this.status ? 'Done' : 'To Do';
     }
 
+    get dateToString(): string {
+        const date = new Date(this.date);
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    }
+
     get getWeekOfDay(): string {
         return WeekDays[new Date(this.date).getDay()];
     }

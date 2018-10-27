@@ -13,12 +13,13 @@
       <mat-hint>{{(error | async)?.estimatedTime}}</mat-hint>
     </mat-form-field>
     <mat-form-field>
-      <input formControlName="date" type="date" matInput placeholder="Estimated Time" value="2018-10-21">
+      <input formControlName="date" type="date" matInput min="{{sprintStart|date:'yyyy-MM-dd'}}" max="{{sprintEnd|date:'yyyy-MM-dd'}}"
+        placeholder="Estimated Time" value="2018-10-21">
       <mat-hint>{{(error | async)?.date}}</mat-hint>
     </mat-form-field>
     <mat-form-field>
       <mat-select placeholder="Select sprint" formControlName="sprintId">
-        <mat-option *ngFor="let sprint of sprintsList |async" [value]="sprint._id">
+        <mat-option *ngFor="let sprint of sprintList" [value]="sprint._id">
           {{sprint.name}}
         </mat-option>
       </mat-select>

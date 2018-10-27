@@ -14,8 +14,11 @@ export class TaskFormComponent implements OnInit {
   error: Observable<TaskModel>;
 
   @Select(SprintState.fetchAll)
-  sprintsList: Observable<SprintModel[]>
+  sprintsList$: Observable<SprintModel[]>
 
+  sprintStart;
+  sprintEnd;
+  sprintList: SprintModel[];
   form: FormGroup;
   constructor(
     private store: Store,
@@ -31,21 +34,33 @@ export class TaskFormComponent implements OnInit {
       sprintId: [],
     })
   }
-
+  setStartEnd(sprint: SprintModel) {
+    this.sprintStart = sprint.start;
+    this.sprintEnd = sprint.end;
+  }
   ngOnInit() {
-    this.sprintsList.subscribe((resp) => {
+    this.sprintsList$.subscribe((resp) => {
+      this.sprintList = resp;
       if (resp.length > 0) {
+        const sprint = resp[resp.length - 1]
         this.form.patchValue({
-          sprintId: resp[resp.length - 1]._id
+          sprintId: sprint._id,
         })
       }
 
     })
+
+    this.form.get('sprintId').valueChanges.subscribe((value) => {
+      const sprint = this.sprintList.find((item) => item._id === value);
+      if (sprint) {
+        this.setStartEnd(sprint);
+      }
+    })
   }
   resetForm() {
     this.form.patchValue({
-      description:'',
-      estimatedTime:''
+      description: '',
+      estimatedTime: ''
     })
   }
   displayFn(sprint?: SprintModel): string | undefined {

@@ -7,6 +7,16 @@ export class SprintModel {
     start: Date;
     end: Date;
 
+    get startToString(): string {
+        const date = new Date(this.start);
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    }
+
+    get endToString(): string {
+        const date = new Date(this.end);
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    }
+
     static getObject(data: Partial<SprintModel> = {}): SprintModel {
         let obj = {};
         if (data) {
