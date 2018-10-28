@@ -7,17 +7,21 @@ export class UserModel {
     name: string;
     email: string;
 }
+export interface IStatus {
+    id: number;
+    display: string;
+}
 export class TaskModel {
     _id: string;
     storyNumber?: string;
     description?: string;
     estimatedTime?: string;
     date?: number;
-    status?: boolean;
+    status?: IStatus;
     user?: UserModel;
     sprintId?: string | SprintModel;
     get statusDisplay(): string {
-        return this.status ? 'Done' : 'To Do';
+        return this.status.display;
     }
 
     get dateToString(): string {
@@ -48,9 +52,10 @@ export class TaskModel {
 
 }
 export class TaskStateModel {
-    list: TaskModel[];
+    list: TaskModel[] = [];
     selectedTask: TaskModel;
     error: TaskModel;
+    statusList: Array<IStatus> = [];
 }
 
 export namespace TaskAction {
@@ -80,6 +85,17 @@ export namespace TaskAction {
         static readonly type = '[Task] Delete';
         constructor(public payload: string) { }
     }
+
+    export class FetchStatus {
+        static readonly type = '[Task] Status load';
+    }
+
+    export class UpdateTaskStatus {
+        static readonly type = '[Task] Task Status update';
+        constructor(public payload: TaskModel) {
+
+        }
+    }
 }
 
 @State<TaskStateModel>({
@@ -94,6 +110,9 @@ export class TaskState {
     static taskError(state: TaskStateModel): TaskModel {
         return state.error;
     }
+
+    @Selector()
+    static statusList(state: TaskStateModel): IStatus[] { return state.statusList }
 
     @Action(TaskAction.FetchMy)
     fetchMy({ patchState }: StateContext<TaskStateModel>, action: TaskAction.FetchAll) {
@@ -150,6 +169,35 @@ export class TaskState {
                         list: state.list.filter((item) => item._id !== id)
                     })
                 }))
+            )
+    }
+
+    @Action(TaskAction.FetchStatus)
+    fetchStatus({ patchState }: StateContext<TaskStateModel>) {
+        return this.service.fetchStatus()
+            .pipe(tap((resp) => {
+                patchState({
+                    statusList: resp,
+                })
+            }))
+    }
+
+    @Action(TaskAction.UpdateTaskStatus)
+    updateTaskStatus(ctx: StateContext<TaskStateModel>, action: TaskAction.UpdateTaskStatus) {
+        const state = ctx.getState();
+        console.log(action.payload)
+        return this.service.updateTaskStatus(action.payload)
+            .pipe(
+                tap((resp) => {
+                    ctx.patchState({
+                        list: state.list.map((item) => {
+                            if (item._id === action.payload._id) {
+                                return TaskModel.getObject(resp);
+                            }
+                            return item;
+                        })
+                    })
+                })
             )
     }
 }

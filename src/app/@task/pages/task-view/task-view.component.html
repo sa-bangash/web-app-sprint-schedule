@@ -16,14 +16,9 @@
     </div>
     <div class="task-options" *ngFor="let date of data.task | keyvalue; let k=index;">
       <div class="full-date" [ngClass]="{'margin-top-zero':k===0}">{{date.key}}</div>
-      <div class="task-values" *ngFor="let task of date.value;let i=index" [ngClass]="{'table-row':i%2===0}">
-        <div class="c-sno">{{i+1}}</div>
-        <div class="c-dispcription">{{task.description}}</div>
-        <div class="c-storynumber">{{task.storyNumber}}</div>
-        <div class="c-time">{{task.estimatedTime}}</div>
-        <div class="c-status status">{{task.statusDisplay}}</div>
-        <div class="c-action"><button mat-raised-button color="warn" type="button" (click)="delete(task)">Delete</button></div>
-      </div>
+
+      <app-task-item-view [task]="task" [idx]="i" [statusList]="statusList$ | async" *ngFor="let task of date.value;let i=index"
+        [ngClass]="{'table-row':i%2===0}"></app-task-item-view>
     </div>
   </div>
 </div>

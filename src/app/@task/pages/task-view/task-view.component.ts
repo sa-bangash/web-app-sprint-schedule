@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskAction, UserModel, SprintState, SprintModel } from '../../store';
+import { TaskAction, UserModel, SprintState, SprintModel, IStatus } from '../../store';
 import { Store, Select } from '@ngxs/store';
 import { TaskState, TaskModel, SprintAction } from '../../store';
 import { Observable } from 'rxjs';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 interface IGroupData {
   name: string;
@@ -23,9 +24,13 @@ export class TaskViewComponent {
   @Select(TaskState.task)
   tasks: Observable<TaskModel[]>;
 
+  @Select(TaskState.statusList)
+  statusList$: Observable<IStatus[]>
 
   constructor(private store: Store) {
+  
     this.store.dispatch(new TaskAction.FetchAll());
+    this.store.dispatch(new TaskAction.FetchStatus());
     this.tasks.subscribe((list) => {
       if (list) {
         this.list = list;
@@ -66,9 +71,5 @@ export class TaskViewComponent {
     return this.groupData.findIndex((item) => {
       return item.name === name
     })
-  }
-
-  delete(task: TaskModel) {
-    this.store.dispatch(new TaskAction.Delete(task._id));
   }
 }

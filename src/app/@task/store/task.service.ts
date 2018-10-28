@@ -34,4 +34,10 @@ export class TaskService extends ActiveService {
   deleteTask(id): Observable<any> {
     return this.delete(`task/${id}`) as Observable<any>
   }
+  fetchStatus(): Observable<Array<{ id: number, display: string }>> {
+    return this.get('task/status');
+  }
+  updateTaskStatus(task: TaskModel): Observable<TaskModel> {
+    return this.put(`task/${task._id}/status`, { status: task.status })
+  }
 }

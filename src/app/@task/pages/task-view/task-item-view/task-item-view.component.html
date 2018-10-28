@@ -1,0 +1,19 @@
+<div class="task-values">
+  <div class="c-sno">{{idx+1}}</div>
+  <div class="c-dispcription">{{task.description}}</div>
+  <div class="c-storynumber">{{task.storyNumber}}</div>
+  <div class="c-time">{{task.estimatedTime}}</div>
+  <div class="c-status status" hidden>{{task.statusDisplay}}</div>
+  <div class="c-dropdown">
+
+    <mat-form-field>
+      <mat-select [formControl]="selectedStatus" [compareWith]="compState">
+        <mat-option *ngFor="let status of statusList" [value]="status">
+          {{status.display}}
+        </mat-option>
+      </mat-select>
+      <!-- <mat-hint>{{(error | async)?.sprintId}}</mat-hint> -->
+    </mat-form-field>
+  </div>
+  <div class="c-action"><button mat-raised-button color="warn" type="button" (click)="delete(task)">Delete</button></div>
+</div>

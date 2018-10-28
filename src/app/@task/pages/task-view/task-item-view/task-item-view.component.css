@@ -1,0 +1,69 @@
+
+.title {
+	display: flex;
+	justify-content: space-around;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	padding: 5px 5px; 
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+}
+
+.task-values{
+	display: flex;
+	justify-content: space-around;
+	padding: 5px 5px; 
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+.task-table{
+	margin: 20px 100px;
+}
+.c-sno{
+	width: 10%;
+}
+.c-time{
+	width: 10%;
+}
+.c-storynumber{
+	width: 10%;
+}
+.c-status{
+	width: 15%;
+}
+.c-dispcription{
+	width: 45%;
+}
+.status{
+	background: #0F6;
+}
+.c-action{
+	width:10%;
+}
+.full-date{
+	text-align: center;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 10px;
+	border:1px solid #ccc;
+	margin-top: 30px;
+}
+.header{
+	text-align: center;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	padding: 5px 10px;
+	font-weight: 500;
+	letter-spacing: 1px;
+	background: rgb(102, 204, 255);
+}
+.margin-top-zero{
+	margin-top: 0px;
+}
+.table-row{
+	background-color: #ccc;
+}
