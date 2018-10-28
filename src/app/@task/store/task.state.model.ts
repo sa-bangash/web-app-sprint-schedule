@@ -8,6 +8,7 @@ export class UserModel {
     email: string;
 }
 export class TaskModel {
+    _id: string;
     storyNumber?: string;
     description?: string;
     estimatedTime?: string;
@@ -135,6 +136,20 @@ export class TaskState {
                     })
                     throw err;
                 })
+            )
+    }
+
+    @Action(TaskAction.Delete)
+    delete(ctx: StateContext<TaskStateModel>, action: TaskAction.Add) {
+        const state = ctx.getState();
+        const id = action.payload;
+        return this.service.deleteTask(id)
+            .pipe(
+                tap((resp => {
+                    ctx.patchState({
+                        list: state.list.filter((item) => item._id !== id)
+                    })
+                }))
             )
     }
 }

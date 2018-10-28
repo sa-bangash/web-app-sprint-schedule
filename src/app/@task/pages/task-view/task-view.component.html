@@ -12,6 +12,7 @@
       <div class="c-storynumber">Story Number</div>
       <div class="c-time">Estimated Time</div>
       <div class="c-status">Status</div>
+      <div class="c-status">Action</div>
     </div>
     <div class="task-options" *ngFor="let date of data.task | keyvalue; let k=index;">
       <div class="full-date" [ngClass]="{'margin-top-zero':k===0}">{{date.key}}</div>
@@ -21,6 +22,7 @@
         <div class="c-storynumber">{{task.storyNumber}}</div>
         <div class="c-time">{{task.estimatedTime}}</div>
         <div class="c-status status">{{task.statusDisplay}}</div>
+        <div><button type="button" (click)="delete(task)">Delete</button></div>
       </div>
     </div>
   </div>

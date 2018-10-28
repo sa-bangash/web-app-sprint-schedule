@@ -23,7 +23,7 @@ export class TaskViewComponent {
   @Select(TaskState.task)
   tasks: Observable<TaskModel[]>;
 
-  
+
   constructor(private store: Store) {
     this.store.dispatch(new TaskAction.FetchAll());
     this.tasks.subscribe((list) => {
@@ -66,5 +66,9 @@ export class TaskViewComponent {
     return this.groupData.findIndex((item) => {
       return item.name === name
     })
+  }
+
+  delete(task: TaskModel) {
+    this.store.dispatch(new TaskAction.Delete(task._id));
   }
 }

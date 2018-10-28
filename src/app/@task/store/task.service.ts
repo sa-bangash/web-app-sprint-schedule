@@ -31,4 +31,7 @@ export class TaskService extends ActiveService {
   FetchAllSprints(): Observable<SprintModel[]> {
     return this.get('task/sprint') as Observable<SprintModel[]>
   }
+  deleteTask(id): Observable<any> {
+    return this.delete(`task/${id}`) as Observable<any>
+  }
 }
