@@ -35,10 +35,13 @@
 	width: 15%;
 }
 .c-dispcription{
-	width: 55%;
+	width: 45%;
 }
 .status{
 	background: #0F6;
+}
+.c-action{
+	width:10%;
 }
 .full-date{
 	text-align: center;
