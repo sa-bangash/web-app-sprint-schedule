@@ -28,6 +28,10 @@ export class AuthService extends ActiveService {
     return this.post(`auth/signup`, obj) as Observable<IAuth>
   }
 
+  createWorkSpace(obj: { name: string, email: string, password: string, confirmPassword: string, workSpace: string }): Observable<IAuth> {
+    return this.post(`auth/create-work-space`, obj) as Observable<IAuth>
+  }
+
   logout(obj: { token: string }): Observable<any> {
     return this.post(`auth/signup`, obj)
   }

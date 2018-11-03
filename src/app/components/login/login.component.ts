@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AuthAction } from '../../store';
-import { Store } from '@ngxs/store';
+import { AuthAction, AuthState } from '../../store';
+import { Store, Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,6 +10,9 @@ import { Store } from '@ngxs/store';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  @Select(AuthState.error)
+  error: Observable<any>;
+
   constructor(private fb: FormBuilder, private store: Store) {
     this.form = this.fb.group({
       email: [],

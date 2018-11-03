@@ -34,20 +34,20 @@ export class TaskItemViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.selectedStatus.valueChanges.subscribe((value:IStatus) => {
+    this.selectedStatus.valueChanges.subscribe((value: IStatus) => {
       this.store.dispatch(new TaskAction.UpdateTaskStatus(
         {
           ...this._task,
           status: value,
-        }
+        } as TaskModel
       ))
-    })
-  }
+  })
+}
 
-  delete(task: TaskModel) {
-    this.store.dispatch(new TaskAction.Delete(task._id));
-  }
-  compState(valueA: IStatus, valueB: IStatus) {
-    return valueA.id === valueB.id;
-  }
+delete (task: TaskModel) {
+  this.store.dispatch(new TaskAction.Delete(task._id));
+}
+compState(valueA: IStatus, valueB: IStatus) {
+  return valueA.id === valueB.id;
+}
 }

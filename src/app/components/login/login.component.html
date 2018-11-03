@@ -10,6 +10,7 @@
           <mat-card-content class="login-content">
             <mat-form-field>
               <input matInput type="email" placeholder="Enter email" formControlName="email">
+              <mat-hint class="error">{{(error | async)?.email}}</mat-hint>
             </mat-form-field>
             <mat-form-field>
               <input matInput type="password" placeholder="Enter password" formControlName="password">

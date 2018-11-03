@@ -7,6 +7,8 @@ import { LoginComponent, SignupComponent, DashboardComponent } from './component
 // guards
 import { LoginGuard, AuthGuard } from './guards';
 
+// constent 
+import { ESignupStatus } from './app.constant';
 const router: Routes = [
     {
         path: '', redirectTo: 'login', pathMatch: 'full',
@@ -21,11 +23,19 @@ const router: Routes = [
         component: SignupComponent,
     },
     {
+        path: 'create-work-space',
+        component: SignupComponent,
+        data: {
+            space: ESignupStatus.workSpaceSignUp,
+        },
+    },
+    {
         path: 'dashboard',
         // component: DashboardComponent,
-        loadChildren:'./@task/task.module#TaskModule',
+        loadChildren: './@task/task.module#TaskModule',
         canActivate: [AuthGuard],
-    }
+    },
+
 ]
 
 
